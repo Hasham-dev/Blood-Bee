@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "657552621311",
+    "project_id": "rn-blood-bee",
+    "storage_bucket": "rn-blood-bee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:657552621311:android:256ff2360c14972003d6ca",
+        "android_client_info": {
+          "package_name": "com.router"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "657552621311-rr8b3r3t9ehjphhlotpe86ep89lcnl0i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.router",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "657552621311-9ur9r8qomnngonko66hj5a0nq9941401.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVgZ9Q_brxfUXjXUI2EkqAhw7Jca0nzI0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "657552621311-9ur9r8qomnngonko66hj5a0nq9941401.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "657552621311-5fj2e7ku7eclbcfuke8bs98frgl97mog.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.router"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
