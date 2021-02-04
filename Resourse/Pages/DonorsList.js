@@ -10,22 +10,6 @@ const DonorsList = ({ navigation }) => {
     const [donorList, setDonorList] = useState(null);
     const { patientBloodGroup } = useContext(AuthContext)
 
-    // const firebaseData = async (values) => {
-    //     const userDocument = await firestore()
-    //         .collection('users')
-    //         .doc('UW6nTBTkLMrOUKbXcI2A')
-    //         .collection('AB')
-    //         .get()
-    //         // .then(querySnapshot => {
-    //         //     console.log('Total users: ', querySnapshot.size);
-
-    //         //     console.log(userDocument); // querySnapshot(documentSnapshot => {
-    //         //     // console.log('User ID: ', querySnapshot.data());
-    //         //     // });
-    //         // });
-    //         await console.log(userDocument.docs[0]._data);
-
-    // }
     const bloodGroupA = async () => {
         //A Data
         const userDocument = await firestore()
@@ -131,6 +115,113 @@ const DonorsList = ({ navigation }) => {
 
     }
 
+    //
+
+    const bloodGroupANegative = async () => {
+        //A Data
+        const userDocument = await firestore()
+            .collection('users')
+            .doc('UW6nTBTkLMrOUKbXcI2A')
+            .collection('A-')
+            .get()
+        const userData = await userDocument.docs
+        await setDonorList(userData);
+
+        // AB Data
+        const userDocumentAB = await firestore()
+            .collection('users')
+            .doc('UW6nTBTkLMrOUKbXcI2A')
+            .collection('O-')
+            .get()
+        const userDataAB = await userDocumentAB.docs
+        await setDonorList(prevData => [
+            ...prevData,
+            ...userDataAB
+        ])
+        await console.log(donorList);
+    }
+    const bloodGroupBNegative = async () => {
+        //A Data
+        const userDocument = await firestore()
+            .collection('users')
+            .doc('UW6nTBTkLMrOUKbXcI2A')
+            .collection('B-')
+            .get()
+        const userData = await userDocument.docs
+        await setDonorList(userData);
+
+        // AB Data
+        const userDocumentAB = await firestore()
+            .collection('users')
+            .doc('UW6nTBTkLMrOUKbXcI2A')
+            .collection('O-')
+            .get()
+        const userDataAB = await userDocumentAB.docs
+        await setDonorList(prevData => [
+            ...prevData,
+            ...userDataAB
+        ])
+        await console.log(donorList);
+    }
+    const bloodGroupABNegative = async () => {
+
+        // AB Data
+        const userDocumentO = await firestore()
+            .collection('users')
+            .doc('UW6nTBTkLMrOUKbXcI2A')
+            .collection('O-')
+            .get()
+        const userDataO = await userDocumentO.docs
+        await setDonorList(userDataO);
+
+        // A Data
+        const userDocumentA = await firestore()
+            .collection('users')
+            .doc('UW6nTBTkLMrOUKbXcI2A')
+            .collection('A-')
+            .get()
+        const userDataA = await userDocumentA.docs
+        await setDonorList(prevData => [
+            ...prevData,
+            ...userDataA
+        ])
+        // B Data
+        const userDocumentB = await firestore()
+            .collection('users')
+            .doc('UW6nTBTkLMrOUKbXcI2A')
+            .collection('B-')
+            .get()
+        const userDataB = await userDocumentB.docs
+        await setDonorList(prevData => [
+            ...prevData,
+            ...userDataB
+        ])
+        // AB Data
+        const userDocumentAB = await firestore()
+            .collection('users')
+            .doc('UW6nTBTkLMrOUKbXcI2A')
+            .collection('AB-')
+            .get()
+        const userDataAB = await userDocumentAB.docs
+        await setDonorList(prevData => [
+            ...prevData,
+            ...userDataAB
+        ])
+        await console.log(donorList);
+    }
+
+    const bloodGroupODemoNegative = async () => {
+        //O Data
+        const userDocument = await firestore()
+            .collection('users')
+            .doc('UW6nTBTkLMrOUKbXcI2A')
+            .collection('O-')
+            .get()
+        const userData = await userDocument.docs
+        await setDonorList(userData);
+
+    }
+
     const dataFunction = async () => {
         if (patientBloodGroup == "O") {
             console.log("Function Started");
@@ -141,6 +232,15 @@ const DonorsList = ({ navigation }) => {
             bloodGroupB();
         } else if (patientBloodGroup == "AB") {
             bloodGroupAB();
+        } else if (patientBloodGroup == "O-") {
+            console.log("Function Started");
+            bloodGroupODemoNegative();
+        } else if (patientBloodGroup == "A-") {
+            bloodGroupANegative();
+        } else if (patientBloodGroup == "B-") {
+            bloodGroupBNegative();
+        } else if (patientBloodGroup == "AB-") {
+            bloodGroupABNegative();
         } else {
             return null
         }
@@ -190,7 +290,7 @@ export default DonorsList;
 const HeaderComponent = ({ navigation }) => {
     return (
         <View style={styles.header}>
-            <FontAwesome name={"arrow-left"} style={styles.iconNav} size={20} color={"#fff"} onPress={()=>navigation.goBack()} />
+            <FontAwesome name={"arrow-left"} style={styles.iconNav} size={20} color={"#fff"} onPress={() => navigation.goBack()} />
             <Text style={{ ...styles.iconTextNav, ...globalStyles.textBold }}>Donor's List</Text>
         </View>
     )

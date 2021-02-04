@@ -2,7 +2,22 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android.iml" filepath="$PROJECT_DIR$/.idea/modules/android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Router.iml" filepath="$PROJECT_DIR$/.idea/modules/Router.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Router.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Router.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1211914776/Router.react-native-async-storage_async-storage.iml" filepath="$PROJECT_DIR$/.idea/modules/1211914776/Router.react-native-async-storage_async-storage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1287878749/Router.react-native-community_google-signin.iml" filepath="$PROJECT_DIR$/.idea/modules/-1287878749/Router.react-native-community_google-signin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/329318100/Router.react-native-community_masked-view.iml" filepath="$PROJECT_DIR$/.idea/modules/329318100/Router.react-native-community_masked-view.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1939792901/Router.react-native-fbsdk.iml" filepath="$PROJECT_DIR$/.idea/modules/-1939792901/Router.react-native-fbsdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/670193702/Router.react-native-firebase_app.iml" filepath="$PROJECT_DIR$/.idea/modules/670193702/Router.react-native-firebase_app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1445756413/Router.react-native-firebase_auth.iml" filepath="$PROJECT_DIR$/.idea/modules/-1445756413/Router.react-native-firebase_auth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-770877264/Router.react-native-firebase_firestore.iml" filepath="$PROJECT_DIR$/.idea/modules/-770877264/Router.react-native-firebase_firestore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1910180995/Router.react-native-gesture-handler.iml" filepath="$PROJECT_DIR$/.idea/modules/1910180995/Router.react-native-gesture-handler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1764835179/Router.react-native-linear-gradient.iml" filepath="$PROJECT_DIR$/.idea/modules/-1764835179/Router.react-native-linear-gradient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1001123714/Router.react-native-picker_picker.iml" filepath="$PROJECT_DIR$/.idea/modules/1001123714/Router.react-native-picker_picker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1673431993/Router.react-native-reanimated.iml" filepath="$PROJECT_DIR$/.idea/modules/1673431993/Router.react-native-reanimated.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1910697940/Router.react-native-safe-area-context.iml" filepath="$PROJECT_DIR$/.idea/modules/-1910697940/Router.react-native-safe-area-context.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1522169668/Router.react-native-screens.iml" filepath="$PROJECT_DIR$/.idea/modules/1522169668/Router.react-native-screens.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/247665203/Router.react-native-vector-icons.iml" filepath="$PROJECT_DIR$/.idea/modules/247665203/Router.react-native-vector-icons.iml" />
     </modules>
   </component>
 </project>

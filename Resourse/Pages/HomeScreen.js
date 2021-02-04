@@ -1,18 +1,33 @@
 import React, { useContext, useState } from 'react';
-import { View, Text, Button, StyleSheet, TouchableOpacity, Modal, ScrollView, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Modal, ScrollView, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 import { AuthContext, AuthProvider } from '../Components/AuthProvider';
 import { Image } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient'
 import FlatButton from '../utils/Button';
 import { windowWidth } from '../utils/Dimensions';
-import DonorForm from './DonorForm';
 import FindDonor from './FindDonorForm';
 import { globalStyles } from '../styles/global';
+// import DonorForm from './DonorForm';
+import { Formik } from 'formik';
+import * as yup from 'yup';
+import { Picker } from '@react-native-picker/picker';
+import firestore from '@react-native-firebase/firestore';
+
 
 const Home = ({ navigation }) => {
+    const reviewSchema = yup.object({
+        donorName: yup.string().required().min(4),
+        city: yup.string().required(),
+        bloodGroup: yup.string().required(),
+        phoneNo: yup.string(Number).required(),
+        eMail: yup.string().required(),
+    
+    
+    })
+    
+    
     const [findDonorModal, setFindDonorModal] = useState(false);
     const [donorModal, setDonorModal] = useState(false);
-    const [donor, setDonor] = useState(true)
     const { logout, user } = useContext(AuthContext)
 
     const donorFromHandle = () => {
@@ -29,6 +44,18 @@ const Home = ({ navigation }) => {
         )
     }
 
+    const FirebaseIput = (values) => {
+        firestore()
+            .collection(`users/UW6nTBTkLMrOUKbXcI2A/${bloodGroup}`)
+            .add(values)
+            .then(() => {
+                console.log('User added!');
+                donorFromHandle();
+            });
+    }
+    const [bloodGroup, setBloodGroup] = useState("A")
+
+
     const findDonorHandleSubmit = () => {
         try {
             setFindDonorModal(false);
@@ -43,50 +70,132 @@ const Home = ({ navigation }) => {
         <View style={styles.container}>
             {/* //Donor Modal */}
 
-                <Modal
-                    animationType="slide"
-                    visible={donorModal}
+            <Modal
+                animationType="slide"
+                visible={donorModal}
 
+            >
+                <TouchableWithoutFeedback
+                    onPress={() => Keyboard.dismiss()}
                 >
-                    <TouchableWithoutFeedback
-                        onPress={() => Keyboard.dismiss()}
-                    >
-                        <View style={styles.modalContent}>
+                    <View style={styles.modalContent}>
 
-                            <TouchableOpacity style={{ ...styles.modalToggle, ...styles.modalClose }}
-                                onPress={() => {
-                                    setDonorModal(!donorModal);
-                                }}>
-                                <Text>Close</Text>
-                            </TouchableOpacity>
-                            <ScrollView>
-                                <DonorForm handle={donorFromHandle} />
-                            </ScrollView>
-                        </View>
-                    </TouchableWithoutFeedback>
-                </Modal>
-                <Modal
-                    animationType="slide"
-                    visible={findDonorModal}
+                        <TouchableOpacity style={{ ...styles.modalToggle, ...styles.modalClose }}
+                            onPress={() => {
+                                setDonorModal(!donorModal);
+                            }}>
+                            <Text>Close</Text>
+                        </TouchableOpacity>
+                        <ScrollView>
+                            <View style={globalStyles.container}>
+                                <Formik
+                                    initialValues={{
+                                        donorName: '',
+                                        city: '',
+                                        bloodGroup,
+                                        phoneNo: '',
+                                        eMail: '',
+                                        userId: user.uid,
+                                    }}
+                                    validationSchema={reviewSchema}
+                                    onSubmit={(values) => {
+                                        console.log(values);
+                                        FirebaseIput(values);
+                                    }}
+                                >
+                                    {(props) => (
+                                        <View>
+                                            <Text style={{ ...globalStyles.text, ...globalStyles.headerText }}>Donor's Form</Text>
+                                            <TextInput
+                                                style={globalStyles.input}
+                                                placeholder="Donor Name"
+                                                onChangeText={props.handleChange('donorName')}
+                                                value={props.values.donorName}
+                                                onBlur={props.handleBlur('donorName')}
+                                            />
+                                            <Text style={globalStyles.errorText}>{props.touched.donorName && props.errors.donorName}</Text>
+                                            <TextInput
+                                                multiline minHeight={60}
+                                                style={globalStyles.input}
+                                                placeholder="Donor City"
+                                                onChangeText={props.handleChange('city')}
+                                                value={props.values.city}
+                                                onBlur={props.handleBlur('city')}
 
+                                            />
+                                            <Text style={globalStyles.errorText}>{props.touched.city && props.errors.city}</Text>
+                                            <Text style={{ ...globalStyles.text }}>Blood Group</Text>
+
+                                            <Picker
+                                                selectedValue={bloodGroup}
+                                                style={globalStyles.input}
+                                                onValueChange={(val) => {
+                                                    setBloodGroup(val)
+                                                    console.log(bloodGroup);
+                                                    props.setFieldValue("bloodGroup", val)
+                                                }}
+                                            >
+                                                <Picker.Item label="A" value="A" />
+                                                <Picker.Item label="B" value="B" />
+                                                <Picker.Item label="AB" value="AB" />
+                                                <Picker.Item label="O" value="O" />
+                                                <Picker.Item label="A-" value="A-" />
+                                                <Picker.Item label="B-" value="B-" />
+                                                <Picker.Item label="AB-" value="AB-" />
+                                                <Picker.Item label="O-" value="O-" />
+                                            </Picker>
+                                            <TextInput
+                                                style={globalStyles.input}
+                                                placeholder="Donor Contact No."
+                                                onChangeText={props.handleChange('phoneNo')}
+                                                value={props.values.phoneNo}
+                                                keyboardType="number-pad"
+                                                onBlur={props.handleBlur('phoneNo')}
+
+                                            />
+                                            <Text style={globalStyles.errorText}>{props.touched.phoneNo && props.errors.phoneNo}</Text>
+                                            <TextInput
+                                                multiline minHeight={60}
+                                                style={globalStyles.input}
+                                                placeholder="Email Address"
+                                                onChangeText={props.handleChange('eMail')}
+                                                value={props.values.eMail}
+                                                onBlur={props.handleBlur('eMail')}
+
+                                            />
+                                            <Text style={globalStyles.errorText}>{props.touched.eMail && props.errors.eMail}</Text>
+                                            <FlatButton text={'Submit'} onPress={props.handleSubmit} />
+                                        </View>
+
+                                    )}
+                                </Formik>
+                            </View>
+                        </ScrollView>
+                    </View>
+                </TouchableWithoutFeedback>
+            </Modal>
+            <Modal
+                animationType="slide"
+                visible={findDonorModal}
+
+            >
+                <TouchableWithoutFeedback
+                    onPress={() => Keyboard.dismiss()}
                 >
-                    <TouchableWithoutFeedback
-                        onPress={() => Keyboard.dismiss()}
-                    >
-                        <View style={styles.modalContent}>
+                    <View style={styles.modalContent}>
 
-                            <TouchableOpacity style={{ ...styles.modalToggle, ...styles.modalClose }}
-                                onPress={() => {
-                                    setFindDonorModal(!findDonorModal);
-                                }}>
-                                <Text>Close</Text>
-                            </TouchableOpacity>
-                            <ScrollView>
-                                <FindDonor handle={findDonorHandleSubmit} />
-                            </ScrollView>
-                        </View>
-                    </TouchableWithoutFeedback>
-                </Modal>
+                        <TouchableOpacity style={{ ...styles.modalToggle, ...styles.modalClose }}
+                            onPress={() => {
+                                setFindDonorModal(!findDonorModal);
+                            }}>
+                            <Text>Close</Text>
+                        </TouchableOpacity>
+                        <ScrollView>
+                            <FindDonor handle={findDonorHandleSubmit} />
+                        </ScrollView>
+                    </View>
+                </TouchableWithoutFeedback>
+            </Modal>
             {/* Find a Donor Modal */}
 
 

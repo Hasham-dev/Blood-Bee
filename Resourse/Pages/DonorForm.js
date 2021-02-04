@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { StyleSheet, Text, TextInput, View, Button, TouchableWithoutFeedback } from 'react-native';
+import {  Text, TextInput, View } from 'react-native';
 import { globalStyles } from '../styles/global';
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -20,7 +20,7 @@ const reviewSchema = yup.object({
 })
 
 export default function DonorForm({ handle }) {
-    const { logout, user } = useContext(AuthContext)
+    const {  user } = useContext(AuthContext)
     console.log(user.uid);
     const FirebaseIput = (values) => {
         firestore()

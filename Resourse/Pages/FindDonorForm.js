@@ -15,7 +15,7 @@ export default function FindDonor({ handle }) {
             <View>
                 <Text style={{ ...globalStyles.text, ...globalStyles.headerText }}>Receiver Blood Details</Text>
                 <Text style={{ ...globalStyles.text, marginTop: 40 }}>Blood Group</Text>
-                
+
                 <Picker
                     selectedValue={patientBloodGroup}
                     style={globalStyles.input}
@@ -28,10 +28,14 @@ export default function FindDonor({ handle }) {
                     <Picker.Item label="B" value="B" />
                     <Picker.Item label="AB" value="AB" />
                     <Picker.Item label="O" value="O" />
+                    <Picker.Item label="A-" value="A-" />
+                    <Picker.Item label="B-" value="B-" />
+                    <Picker.Item label="AB-" value="AB-" />
+                    <Picker.Item label="O-" value="O-" />
                 </Picker>
-                <View style={{marginTop: 60}}>
+                <View style={{ marginTop: 60 }}>
 
-                <FlatButton  text={'Find Donors'} onPress={() => handle()} />
+                    <FlatButton text={'Find Donors'} onPress={() => handle()} />
                 </View>
 
             </View>
